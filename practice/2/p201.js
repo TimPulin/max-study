@@ -1,13 +1,10 @@
 // TODO Iterator
-
+// NOTE Почему решение с применением regexp эффективнее, чем с join(' ')
 function shortestWord(str) {
-  const wordsLength = str.split(" ").map((word) => word.length);
-
-  // return wordsLength.reduce((min, item) => {
-  //   return item < min ? item : min;
-  // }, Infinity);
-
-  return wordsLength.reduce((min, item) => Math.min(item, min), Infinity);
+  return str
+    .matchAll(/[^ ]+/g)
+    .map((word) => word.length)
+    .reduce((min, item) => Math.min(item, min), Infinity);
 }
 
 // https://github.com/tc39/proposal-math-sum?tab=readme-ov-file#iterable-taking-or-variadic

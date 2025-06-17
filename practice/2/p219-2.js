@@ -1,21 +1,23 @@
 function decodeRLE(str) {
-  let numberStr = "";
   let result = "";
 
-  for (char of str) {
+  let numberStr = "";
+  let letter = "";
+
+  for (const char of str) {
     if (isDigit(char)) {
       numberStr += char;
     } else {
       const number = getNumber(numberStr);
 
-      result += decode(result.charAt(result.length - 1), number);
+      result += decode(letter, number);
       numberStr = "";
-      result += char;
+      letter = char;
     }
   }
   const number = getNumber(numberStr);
 
-  result += decode(result.charAt(result.length - 1), number);
+  result += decode(letter, number);
   return result;
 }
 
@@ -24,7 +26,7 @@ function isDigit(value) {
 }
 
 function getNumber(numberStr) {
-  return numberStr === "" ? 0 : Number(numberStr) - 1;
+  return numberStr === "" ? 1 : Number(numberStr);
 }
 
 function decode(char, number) {

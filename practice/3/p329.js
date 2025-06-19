@@ -30,7 +30,7 @@ function mostFrequentSum(a1, a2) {
     }
   }
   
-  return sumMap.get(maxSum)
+  return sumMap.get(maxSum);
 }
 
 arr1 = [891,1417,767,1124,-255,319,844,1359,1429,1540]

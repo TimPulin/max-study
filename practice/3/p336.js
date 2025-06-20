@@ -93,12 +93,12 @@ function createTeam() {
   };
 }
 
-const SCORES = {
-  WIN_SCORES: 2,
-  DRAW_SCORES: 1,
-  LOSE_SCORES: 0,
+const SCORE = {
+  WIN: 2,
+  DRAW: 1,
+  LOSE: 0,
 };
 function calcScores(scoredGoals, missedGoals) {
-  if (scoredGoals === missedGoals) return SCORES.DRAW_SCORES;
-  return scoredGoals - missedGoals > 0 ? SCORES.WIN_SCORES : SCORES.LOSE_SCORES;
+  if (scoredGoals === missedGoals) return SCORE.DRAW;
+  return scoredGoals - missedGoals > 0 ? SCORE.WIN : SCORE.LOSE;
 }

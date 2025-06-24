@@ -9,15 +9,13 @@ function isValidIP(str) {
   if (apiList.length !== 4) return false;
 
   return apiList.every(
-    (item) => isValidDigit(item) && isValidRange(Number(item))
+    (item) => {
+      const number = Number(item);
+      // NOTE как другим способом проверить, что строка не является, как пример, "01"
+      return item === String(number) && number >= 0 && number <= 255
+    }
   );
 }
 
-// NOTE как другим способом проверить, что строка не является, как пример, "01"
-function isValidDigit(str) {
-  return str === String(Number(str));
-}
 
-function isValidRange(number) {
-  return number >= 0 && number <= 255;
-}
+

@@ -13,8 +13,10 @@ function toCamelCase(kebabCase) {
 function formatByImperative(kebabCase) {
   let result = "";
   let isCapitalizeNext = false;
+
   for (char of kebabCase) {
     let currentChar = char;
+
     if (char === SEPARATOR) {
       currentChar = "";
       isCapitalizeNext = true;
@@ -22,6 +24,7 @@ function formatByImperative(kebabCase) {
       currentChar = char.toUpperCase();
       isCapitalizeNext = false;
     }
+    
     result += currentChar;
   }
 

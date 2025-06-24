@@ -2,7 +2,7 @@
 /*
 Для данной строки верните массив с индексами символов больших букв (A, B, ..., Z).
 */
-
+// NOTE проверка char === char.toUpperCase() пропускает цифры
 const CAPITALS_PATTERN = /[A-ZА-Я]/;
 function findCapitals(word) {
   const capitals = [];

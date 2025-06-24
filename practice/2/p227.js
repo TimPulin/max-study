@@ -11,9 +11,10 @@ function incrementString(str) {
 
 function useCycle(str) {
   let digits = [];
+
   for (let i = str.length - 1; i >= 0; i--) {
     const currentChar = str[i];
-    if (isDigit(currentChar)) {
+    if (currentChar >= "0" && currentChar <= "9") {
       digits.push(Number(currentChar));
     } else {
       return `${str.slice(0, i + 1)}${increase(extractDigit(digits))}`;
@@ -26,7 +27,7 @@ function extractDigit(digits) {
 }
 
 function useRegexp(str) {
-  const { digits, str: cleanedStr } = trimEndDigits(str);
+  const { digits, cleanedStr } = trimEndDigits(str);
   return `${cleanedStr}${increase(digits)}`;
 }
 const DIGITS_PATTERN = /[\d]+$/;
@@ -37,13 +38,10 @@ function trimEndDigits(str) {
 
   return {
     digits,
-    str: cleanedStr,
+    cleanedStr,
   };
 }
 
-function isDigit(str) {
-  return str >= "0" && str <= "9";
-}
 
 function increase(str) {
   return (Number(str) + 1).toString().padStart(str.length, "0");

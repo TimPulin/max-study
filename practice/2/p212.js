@@ -11,7 +11,7 @@
 function bingo(ticket) {
   let counter = 0;
   for (const [str, number] of ticket) {
-    const options = Array.from(str).map((char) => char.charCodeAt(0));
+    const options = Array.from(str).map((char) => char.at(0));
     if (options.includes(number)) counter++;
   }
 

@@ -7,6 +7,7 @@ function formatWords(...words) {
   let result = "";
 
   const lastIndex = words.length - 1;
+  
   for (let i = 0; i <= lastIndex; i++) {
     separator = chooseSeparator(i, lastIndex);
     result += `${words[i]}${separator}`;

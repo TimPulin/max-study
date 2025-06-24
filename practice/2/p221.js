@@ -16,16 +16,16 @@
 function balance(book) {
   let result = [];
   let totalExpense = [];
+
   const cleanedBookArr = cleanBook(book)
     .split("\n")
     .filter((item) => item !== "");
-  console.log(cleanedBookArr);
-
+  
   if (cleanedBookArr.length > 0) {
     const balance = cleanedBookArr[0];
     let currentBalance = Number(balance);
 
-    result.push(formatBalance(currentBalance));
+    result.push(`Original Balance: ${formatMoney(balance)}`);
 
     for (let i = 1; i < cleanedBookArr.length; i++) {
       const [id, category, price] = cleanedBookArr[i].split(" ");
@@ -35,25 +35,15 @@ function balance(book) {
       totalExpense.push(priceNumber);
       currentBalance -= priceNumber;
 
-      result.push(
-        formatLine({
-          id,
-          category,
-          price: priceNumber,
-          balance: currentBalance,
-        })
-      );
+      result.push(`${id} ${category} ${formatMoney(price)} Balance ${formatMoney(balance)}`);
     }
   }
-  const footer = formatFooter(totalExpense);
-  result.push(footer);
+
+  result.push(formatFooter(totalExpense));
 
   return result.join("\n");
 }
 
-function formatBalance(balance) {
-  return `Original Balance: ${formatMoney(balance)}`;
-}
 
 function formatFooter(totalExpense) {
   const footer = [];
@@ -76,12 +66,6 @@ function formatTotalExpense(value) {
 
 function formatAverageExpense(value) {
   return `Average expense ${formatMoney(value)}`;
-}
-
-function formatLine({ id, category, price, balance }) {
-  return `${id} ${category} ${formatMoney(price)} Balance ${formatMoney(
-    balance
-  )}`;
 }
 
 function formatMoney(value) {

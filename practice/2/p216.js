@@ -6,12 +6,12 @@
 
 
 function formatPrice(price) {
-  let formatted = '';
   const strPrice = Array.from(price.toString()).reverse();
 
+  let formatted = '';
+
   for (let i = 0; i < strPrice.length; i++) {
-    const separator = i % 3 === 0 && i !== 0 ? ' ' : '';
-    formatted = `${strPrice[i]}${separator}${formatted}`
+    formatted = `${strPrice[i]}${getSeparator(i)}${formatted}`
   }
   return formatted;
 }
@@ -23,19 +23,19 @@ function formatPriceWithoutArr(price) {
   let formatted = '';
 
   for (let i = strPrice.length - 1, counter = 0; i >= 0; i--) {
-    
-    const separator = counter % 3 === 0 && counter !== 0 ? ' ' : '';
-    formatted = `${strPrice[i]}${separator}${formatted}`
-
+    formatted = `${strPrice[i]}${getSeparator(counter)}${formatted}`
     counter++;
   }
 
   return formatted;
 }
 
+function getSeparator(index) {
+  return index % 3 === 0 && index !== 0 ? ' ' : '';
+}
 
 
-// NOTE не проходят тесты
+// NOTE не проходят тесты хотя отдает правильную строку
 const formatter = Intl.NumberFormat('ru');
 function formatPriceByIntl(price) {
   return formatter.format(price)

@@ -23,10 +23,13 @@ function checkExam(correctAnswers, studentAnswers) {
   return scores < 0 ? 0 : scores;
 }
 
-const CORRECT = 4;
-const EMPTY = 0;
-const WRONG = -1;
+const SCORE = {
+  correct: 4,
+  empty: 0,
+  wrong: -1
+}
+
 function getScore(correctAnswer, answer) {
-  if (answer === "") return EMPTY;
-  return answer === correctAnswer ? CORRECT : WRONG;
+  if (answer === "") return SCORE.empty;
+  return answer === correctAnswer ? SCORE.correct : SCORE.wrong;
 }

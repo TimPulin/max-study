@@ -1,12 +1,18 @@
 function countSmileys(arr) {
-  // return arr.reduce((counter, str) => {
-  //   if (isSmile(str)) counter++;
-  //   return counter;
-  // }, 0);
+  return countByFilter(arr);
+}
+
+
+function countByFilter(arr) {
   return arr.filter(isSmile).length;
 }
 
-["3245", "87978", "5647"].map(Number);
+function countByReduce(arr) {
+    return arr.reduce((counter, str) => {
+    if (isSmile(str)) counter++;
+    return counter;
+  }, 0);
+}
 
 const SMILE_PATTERN = /^[:;][-~]?[)D]$/;
 function isSmile(str) {

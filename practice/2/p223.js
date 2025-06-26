@@ -5,9 +5,11 @@
 */
 
 function rgb2hex(r, g, b) {
-  let hex = "#";
-  for (item of [r, g, b]) {
-    hex += item.toString(16).padStart(2, "0");
-  }
-  return hex;
+  // let hex = "#";
+  // for (const item of [r, g, b]) {
+  //   hex += item.toString(16).padStart(2, "0");
+  // }
+  return (
+    "#" + [r, g, b].map((item) => item.toString(16).padStart(2, "0")).join("")
+  );
 }

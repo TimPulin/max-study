@@ -8,11 +8,19 @@
 если код одного из символов в строке равен числу. Код символа — код из таблицы ASCII.
 */
 
+// https://maxcode.dev/problems/lottery-ticket/
+
 function bingo(ticket) {
   let counter = 0;
   for (const [str, number] of ticket) {
-    const options = Array.from(str).map((char) => char.at(0));
-    if (options.includes(number)) counter++;
+    // const isMiniWin = Array.from(str).map((char) => char.charCodeAt(0)).includes(number);
+    // const isMiniWin = Array.from(str).some((char) => char.charCodeAt(0) === number);
+    const isMiniWin = Iterator.from(str).some(
+      (char) => char.charCodeAt(0) === number
+    );
+    if (isMiniWin) {
+      counter++;
+    }
   }
 
   return counter;

@@ -13,64 +13,68 @@
 Все числа, обозначающие деньги, должны содержать 2 символа после запятой: например, 1234.50.
 */
 
-function balance(book) {
-  let result = [];
-  let totalExpense = [];
+function formatMoney(value) {
+  return value.toFixed(2);
+}
 
-  const cleanedBookArr = cleanBook(book)
+function balance(book) {
+  const [firstLine, lines] = book
+    .replaceAll(/[^a-z0-9. \n]/gi, "")
     .split("\n")
     .filter((item) => item !== "");
-  
-  if (cleanedBookArr.length > 0) {
-    const balance = cleanedBookArr[0];
-    let currentBalance = Number(balance);
 
-    result.push(`Original Balance: ${formatMoney(balance)}`);
+  const originalBalance = Number(firstLine);
+  let currentBalance = originalBalance;
 
-    for (let i = 1; i < cleanedBookArr.length; i++) {
-      const [id, category, price] = cleanedBookArr[i].split(" ");
-      //   NOTE как лучше назвать эту переменную?
-      const priceNumber = Number(price);
+  const result = [];
 
-      totalExpense.push(priceNumber);
-      currentBalance -= priceNumber;
+  result.push(`Original Balance: ${formatMoney(balance)}`);
 
-      result.push(`${id} ${category} ${formatMoney(price)} Balance ${formatMoney(balance)}`);
-    }
+  for (const line of lines) {
+    const [id, category, priceStr] = line.split(" ");
+    const price = Number(priceStr);
+
+    currentBalance -= price;
+    result.push(
+      `${id} ${category} ${formatMoney(price)} Balance ${formatMoney(balance)}`
+    );
   }
 
-  result.push(formatFooter(totalExpense));
+  const totalExpense = originalBalance - currentBalance;
+  const averageExpense = total / lines.length;
+
+  footer.push(`Total expense ${formatMoney(totalExpense)}`);
+  footer.push(`Average expense ${formatMoney(averageExpense)}`);
 
   return result.join("\n");
 }
 
+// function formatFooter(totalExpense) {
+//   const footer = [];
 
-function formatFooter(totalExpense) {
-  const footer = [];
+//   const total = totalExpense.reduce((sum, price) => {
+//     sum += price;
+//     return sum;
+//   }, 0);
+//   const average = total / totalExpense.length;
 
-  const total = totalExpense.reduce((sum, price) => {
-    sum += price;
-    return sum;
-  }, 0);
-  const average = total / totalExpense.length;
+//   footer.push(formatTotalExpense(total));
+//   footer.push(formatAverageExpense(average));
 
-  footer.push(formatTotalExpense(total));
-  footer.push(formatAverageExpense(average));
+//   return footer.join("\n");
+// }
 
-  return footer.join("\n");
-}
+// function formatTotalExpense(value) {
+//   return `Total expense ${formatMoney(value)}`;
+// }
 
-function formatTotalExpense(value) {
-  return `Total expense ${formatMoney(value)}`;
-}
+// function formatAverageExpense(value) {
+//   return `Average expense ${formatMoney(value)}`;
+// }
 
-function formatAverageExpense(value) {
-  return `Average expense ${formatMoney(value)}`;
-}
-
-function formatMoney(value) {
-  return value.toFixed(2);
-}
+// function formatMoney(value) {
+//   return value.toFixed(2);
+// }
 
 const SPACE_PATTERN = /[ ]{2,}/g;
 const LINE_BREAK_PATTERN = /[\r\n]{2,}/g;

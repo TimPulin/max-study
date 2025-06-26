@@ -20,14 +20,20 @@ function checkExam(correctAnswers, studentAnswers) {
     scores += getScore(correctAnswers[i], studentAnswers[i]);
   }
 
+  for (let i = 0; i < studentAnswers.length; i++) {
+    if (studentAnswers[i] === "") continue;
+    scores +=
+      studentAnswers[i] === correctAnswers[i] ? SCORE.correct : SCORE.wrong;
+  }
+
   return scores < 0 ? 0 : scores;
 }
 
 const SCORE = {
   correct: 4,
   empty: 0,
-  wrong: -1
-}
+  wrong: -1,
+};
 
 function getScore(correctAnswer, answer) {
   if (answer === "") return SCORE.empty;

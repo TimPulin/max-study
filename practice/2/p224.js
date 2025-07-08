@@ -24,7 +24,7 @@ function formatByImperative(kebabCase) {
       currentChar = char.toUpperCase();
       isCapitalizeNext = false;
     }
-    
+
     result += currentChar;
   }
 
@@ -35,11 +35,9 @@ function formatByFunctional(kebabCase) {
   return kebabCase
     .split(SEPARATOR)
     .map((word, index) => {
-      return index === 0 ? word : capitalize(word);
+      return index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1);
     })
     .join("");
 }
 
-function capitalize(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
+console.log(formatByFunctional("aaaa-dddd-tttt"));

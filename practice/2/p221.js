@@ -18,7 +18,7 @@ function formatMoney(value) {
 }
 
 function balance(book) {
-  const [firstLine, lines] = book
+  const [firstLine, ...lines] = book
     .replaceAll(/[^a-z0-9. \n]/gi, "")
     .split("\n")
     .filter((item) => item !== "");
@@ -28,7 +28,7 @@ function balance(book) {
 
   const result = [];
 
-  result.push(`Original Balance: ${formatMoney(balance)}`);
+  result.push(`Original Balance: ${formatMoney(currentBalance)}`);
 
   for (const line of lines) {
     const [id, category, priceStr] = line.split(" ");
@@ -36,45 +36,20 @@ function balance(book) {
 
     currentBalance -= price;
     result.push(
-      `${id} ${category} ${formatMoney(price)} Balance ${formatMoney(balance)}`
+      `${id} ${category} ${formatMoney(price)} Balance ${formatMoney(
+        currentBalance
+      )}`
     );
   }
 
   const totalExpense = originalBalance - currentBalance;
-  const averageExpense = total / lines.length;
+  const averageExpense = totalExpense / lines.length;
 
-  footer.push(`Total expense ${formatMoney(totalExpense)}`);
-  footer.push(`Average expense ${formatMoney(averageExpense)}`);
+  result.push(`Total expense ${formatMoney(totalExpense)}`);
+  result.push(`Average expense ${formatMoney(averageExpense)}`);
 
   return result.join("\n");
 }
-
-// function formatFooter(totalExpense) {
-//   const footer = [];
-
-//   const total = totalExpense.reduce((sum, price) => {
-//     sum += price;
-//     return sum;
-//   }, 0);
-//   const average = total / totalExpense.length;
-
-//   footer.push(formatTotalExpense(total));
-//   footer.push(formatAverageExpense(average));
-
-//   return footer.join("\n");
-// }
-
-// function formatTotalExpense(value) {
-//   return `Total expense ${formatMoney(value)}`;
-// }
-
-// function formatAverageExpense(value) {
-//   return `Average expense ${formatMoney(value)}`;
-// }
-
-// function formatMoney(value) {
-//   return value.toFixed(2);
-// }
 
 const SPACE_PATTERN = /[ ]{2,}/g;
 const LINE_BREAK_PATTERN = /[\r\n]{2,}/g;
@@ -98,4 +73,4 @@ const input = `1000.00!=
 
 const input2 = "1124\n132 Hardware 17.00\n127 Vegetables;! 17.00?;\n";
 
-console.log(balance(input2));
+console.log(balance(input));

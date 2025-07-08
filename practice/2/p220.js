@@ -7,12 +7,6 @@ function countByFilter(arr) {
 }
 
 function countByReduce(arr) {
-  // return arr.reduce((counter, str) => {
-  //   if (isSmile(str)) counter++;
-  //   return counter;
-  // }, 0);
-
-  // return arr.filter(isSmile).length;
   return arr
     .values()
     .filter(isSmile)

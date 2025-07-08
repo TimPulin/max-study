@@ -26,7 +26,7 @@ function encode(word) {
   for (const item of splitted) {
     const encoded =
       item.length >= LONG_WORD_LENGTH
-        ? `${item.charAt(0)}${item.length - 2}${item.charAt(item.length - 1)}`
+        ? `${item[0]}${item.length - 2}${item[item.length - 1]}`
         : item;
     result.push(encoded);
   }
@@ -46,5 +46,3 @@ function trimEndPunctuation(word) {
     word: cleanWord,
   };
 }
-
-console.log(encode("dssd"));

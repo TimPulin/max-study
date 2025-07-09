@@ -17,7 +17,7 @@ function obfuscateByRegexp(email) {
 function obfuscateByCycle(email) {
   const result = [];
 
-  for (char of email) {
+  for (const char of email) {
     let currentChar = char;
     if (char === ".") {
       currentChar = " [dot] ";

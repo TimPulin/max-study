@@ -14,18 +14,15 @@ function formatByImperative(kebabCase) {
   let result = "";
   let isCapitalizeNext = false;
 
-  for (char of kebabCase) {
-    let currentChar = char;
-
+  for (const char of kebabCase) {
     if (char === SEPARATOR) {
-      currentChar = "";
       isCapitalizeNext = true;
     } else if (isCapitalizeNext) {
-      currentChar = char.toUpperCase();
       isCapitalizeNext = false;
+      result += char.toUpperCase();
+    } else {
+      result += char;
     }
-
-    result += currentChar;
   }
 
   return result;
@@ -33,11 +30,15 @@ function formatByImperative(kebabCase) {
 
 function formatByFunctional(kebabCase) {
   return kebabCase
-    .split(SEPARATOR)
-    .map((word, index) => {
-      return index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1);
-    })
-    .join("");
+    .toLowerCase()
+    .replaceAll(/-(.)/gi, (_, char) => char.toUpperCase());
+
+  // return kebabCase
+  //   .split(SEPARATOR)
+  //   .map((word, index) => {
+  //     return index === 0 ? word : word[0].toUpperCase() + word.slice(1);
+  //   })
+  //   .join("");
 }
 
-console.log(formatByFunctional("aaaa-dddd-tttt"));
+console.log(formatByFunctional("Aaaa-50Dddd-Tttt"));

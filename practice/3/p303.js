@@ -12,13 +12,10 @@
 // greeting
 
 function greetDevelopers(list) {
-  return list.map((person) => {
-    const greeting = createGreeting(person.firstName, person.language);
-    return {
-      ...person,
-      greeting,
-    };
-  });
+  return list.map((person) => ({
+    ...person,
+    greeting: `Hi ${person.firstName}, what do you like the most about ${person.language}?`,
+  }));
 }
 
 function createGreeting(name, language) {

@@ -1,19 +1,16 @@
-/*
-  {
-    ip: "111.23.65.96",
-    time: "12:31:56",
-    info: [
-      {key: "resolution", value: "1280x800"},
-      {key: "browser", value: "Safari"},
-    ]
-  },
-*/
+function parseCsv(csv) {
+  const [headersRow, ...dataRow] = csv.split("\n");
 
-function browserList(visits) {
-  const browsers = visits
-    .map(visit => visit.info)
-    .filter((item) => item.key === 'browser')
-    .map(item => item.value);
+  const headers = headersRow.split(";");
 
-    return new Set(browsers);
+  return dataRow.map((line) => {
+    const obj = {};
+    const values = line.split(";");
+
+    for (let i = 0; i < values.length; i++) {
+      obj[headers[i]] = values[i];
+    }
+
+    return obj;
+  });
 }

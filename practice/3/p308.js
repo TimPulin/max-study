@@ -1,20 +1,24 @@
+/*
+Напишите функцию, которая трансформирует цвет в формате hex в цвет в формате rgb.
+*/
+
 function hex2rgb(str) {
-  const cleanedStr = str.replace('#', '');
+  const cleanedStr = str.replace("#", "");
   const hexParts = [];
 
-  for (let i = 0; i < cleanedStr.length; i +=2){
+  for (let i = 0; i < cleanedStr.length; i += 2) {
     const part = cleanedStr.slice(i, i + 2);
     hexParts.push(part);
   }
 
-  const rgbParts = hexParts.map(( part) => parseInt(part, 16), {});
+  //   NOTE values() не применял по причине ограниченного количества элементов
+  const [r, g, b] = hexParts.map((part) => parseInt(part, 16), {});
 
   return {
-    r: rgbParts[0],
-    g: rgbParts[1],
-    b: rgbParts[2],
-  }
-  
+    r,
+    g,
+    b,
+  };
 }
 
-hex2rgb('#001122');
+console.log(hex2rgb("#001122"));

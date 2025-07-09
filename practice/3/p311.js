@@ -19,14 +19,14 @@ function browserList(visits) {
 
 function useDeclaration(visits) {
   const browsers = visits
-    .map((visit) => visit.info)
-    .flat()
+    .values()
+    .flatMap((visit) => visit.info)
     .filter((item) => item.key === "browser")
     .map((item) => item.value);
 
   return Array.from(new Set(browsers).values());
 }
-
+// NOTE на мой взгляд этот вариант чище
 function useCycle(visits) {
   const browsers = new Set();
   for (const { info } of visits) {

@@ -1,6 +1,6 @@
 function removeKey(objects, key) {
   return objects.map((obj) => {
-    const copiedObj = Object.assign({}, obj);
+    const copiedObj = { ...obj };
     delete copiedObj[key];
     return copiedObj;
   });

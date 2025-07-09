@@ -27,10 +27,15 @@ function extractDigit(digits) {
 }
 
 function useRegexp(str) {
-  const { digits, cleanedStr } = trimEndDigits(str);
-  return `${cleanedStr}${increase(digits)}`;
+  return str.replace(/\d*$/, (str) =>
+    (Number(str) + 1).toString().padStart(str.length, "0")
+  );
 }
-const DIGITS_PATTERN = /[\d]+$/;
+
+console.log(useRegexp("dadddf023"));
+console.log(useRegexp("dadddf"));
+
+const DIGITS_PATTERN = /\d+$/;
 function trimEndDigits(str) {
   const match = str.match(DIGITS_PATTERN);
   const digits = match ? match[0] : 0;
@@ -41,7 +46,6 @@ function trimEndDigits(str) {
     cleanedStr,
   };
 }
-
 
 function increase(str) {
   return (Number(str) + 1).toString().padStart(str.length, "0");

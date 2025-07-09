@@ -9,11 +9,7 @@
 
 const NON_ACTIVITY_TIMEOUT = 10;
 function whosOnline(friends) {
-  const statuses = {
-    online: [],
-    offline: [],
-    away: [],
-  };
+  const statuses = {};
 
   let statusKey = null;
   for (const friend of friends) {
@@ -26,15 +22,11 @@ function whosOnline(friends) {
     }
 
     if (statusKey) {
+      statuses[statusKey] ??= [];
       statuses[statusKey].push(friend.username);
     }
   }
-
-  return Object.fromEntries(
-    Object.entries(statuses)
-      .values()
-      .filter(([_, usernames]) => usernames.length > 0)
-  );
+  return statuses;
 }
 
 const users = [

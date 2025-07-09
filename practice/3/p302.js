@@ -4,10 +4,11 @@ function findDevelopers(teams) {
   isInputValid(teams);
 
   return teams
-    .map((team) => team.members)
-    .flat()
+    .values()
+    .flatMap((team) => team.members)
     .filter((member) => member.role === TARGET_ROLE)
     .map((member) => member.name)
+    .toArray()
     .sort((a, b) => a.localeCompare(b, "en"));
 }
 

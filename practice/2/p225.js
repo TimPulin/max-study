@@ -18,6 +18,13 @@ function abbreviate(string) {
   return result.join(" ");
 }
 
+function abbreviate2(string) {
+  return string.replaceAll(
+    /[a-z]{4,}/gi,
+    (item) => `${item[0]}${item.length - 2}${item.at(-1)}`
+  );
+}
+
 const LONG_WORD_LENGTH = 4;
 const BAR_SEPARATOR = "-";
 function encode(word) {

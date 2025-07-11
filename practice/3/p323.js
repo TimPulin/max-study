@@ -9,13 +9,8 @@ function compareObjects(o1, o2) {
   if (o1Keys.length !== o2Keys.length) return false;
 
   for (const key of o1Keys) {
-    if (!Object.hasOwn(o2, key)) return false;
-    if (o1[key] !== o2[key] && !(isNaNEqual(o1[key], o2[key]))) return false;
+    if (!Object.hasOwn(o2, key) || !Object.is(o1[key], o2[key])) return false;
   }
 
   return true;
-}
-
-function isNaNEqual(value1, value2) {
-  return Number.isNaN(value1) && Number.isNaN(value2); 
 }

@@ -10,6 +10,7 @@ function equalArrays(arr1, arr2) {
   const counter = new Map();
 
   if (arr1.length !== arr2.length) return false;
+
   for (const item of arr1) {
     const key = createKey(item);
     const amount = (counter.get(key) ?? 0) + 1;
@@ -18,6 +19,7 @@ function equalArrays(arr1, arr2) {
 
   for (const item of arr2) {
     const key = createKey(item);
+
     if (!counter.has(key)) return false;
     const amount = counter.get(key) - 1;
     counter.set(key, amount);

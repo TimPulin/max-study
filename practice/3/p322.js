@@ -7,34 +7,22 @@ product — название добавляемого товара (это мо�
 Вернуть нужно новый объект, в котором количество соответствующего продукта изменено. Исходный объект мутировать нельзя.
 */
 
-
-const ADD = 'add';
-const REMOVE = 'remove';
+const ADD = "add";
+const REMOVE = "remove";
 
 const operationValues = {
   [ADD]: 1,
   [REMOVE]: -1,
-}
+};
 
 function updateShoppingCart(shoppingCart, operation, product) {
-  const newCart = {...shoppingCart};
+  const newCart = { ...shoppingCart };
 
-  const productAmount = calcProductAmount(newCart, operation, product);
+  const productAmount = (newCart[product] ?? 0) + operationValues[operation];
 
-  productAmount <= 0 ? delete newCart[product] : newCart[product] = productAmount;
+  productAmount <= 0
+    ? delete newCart[product]
+    : (newCart[product] = productAmount);
 
   return newCart;
 }
-
-function calcProductAmount(cart, operation, product) {
-  const currentAmount = cart[product] ?? 0;
-  return currentAmount + getOperationValues(operation);
-}
-
-
-function getOperationValues(operation) {
-  if (operationValues[operation] === 'undefined') throw new Error(`operation should be ${Object.keys(operationValues).join(', ')}, got ${operation}`);
-  return operationValues[operation];
-}
-
-

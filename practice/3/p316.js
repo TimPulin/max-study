@@ -8,7 +8,7 @@ function isAnagram(a, b) {
   return useObj(a, b);
 }
 
-// NOTE GPT говорит, что это решение эффективнее благодаря отсутствию сортировки, у которой сложно O(n log n)
+// NOTE GPT говорит, что это решение эффективнее благодаря отсутствию сортировки, у которой сложность O(n log n)
 function useObj(a, b) {
   const charCount = {};
   for (const char of a.toLowerCase()) {

@@ -10,37 +10,37 @@
 
 Объекты в итоговом массиве должны быть отсортированы по именам студентов (по возрастанию).
 */
-// FIX не проходит второй тест
+
 function bestResults(attempts) {
   const attemptsByStudent = {};
 
   for (const { name, score, date } of attempts) {
-    const dateStr = transformDateToISOStr(date);
     if (
       !Object.hasOwn(attemptsByStudent, name) ||
-      score > attemptsByStudent[name].attempt.score ||
-      (score === attemptsByStudent[name].attempt.score &&
-        dateStr < attemptsByStudent[name].attempt.dateStr)
+      score > attemptsByStudent[name].score ||
+      (score === attemptsByStudent[name].score &&
+        transformDateToISOStr(date) <
+          transformDateToISOStr(attemptsByStudent[name].date))
     ) {
-      attemptsByStudent[name] = { attempt: { name, score, date }, dateStr };
+      attemptsByStudent[name] = { name, score, date };
     }
   }
 
-  return Object.values(attemptsByStudent)
-    .map((item) => item.attempt)
-    .sort((a, b) => a.name.localeCompare(b.name));
+  return Object.values(attemptsByStudent).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
 }
 
 function transformDateToISOStr(date) {
-  const dateList = date.split(".");
-  return `${dateList[2]}${dateList[1]}${dateList[0]}`;
+  const [day, month, year] = date.split(".");
+  return `${year}${month}${day}`;
 }
 
 const attempts = [
   {
     name: "test",
     score: 100,
-    date: "01.07.2024",
+    date: "01.06.2024",
   },
 
   {

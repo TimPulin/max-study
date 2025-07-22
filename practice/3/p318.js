@@ -30,13 +30,13 @@ const bracketOppositePair = {
 };
 
 function isValidBrackets(str) {
-  const stack = [];
+  const stack = createStack();
   for (const char of str) {
     if (OPEN_BRACKETS.includes(char)) {
       stack.push(char);
     } else if (CLOSE_BRACKETS.includes(char)) {
-      if (char === bracketOppositePair.getPair(getCurrentOpenBracket(stack))) {
-        removeFromStack(stack);
+      if (char === bracketOppositePair.getPair(stack.getCurrentOpenBracket())) {
+        stack.remove();
       } else {
         return false;
       }
@@ -45,12 +45,16 @@ function isValidBrackets(str) {
   return stack.length === 0;
 }
 
-function getCurrentOpenBracket(stack) {
-  return stack[stack.length - 1];
-}
+function createStack() {
+  const stack = [];
+  stack.getCurrentOpenBracket = function () {
+    return this[this.length - 1];
+  };
+  stack.remove = function () {
+    this.pop(this.length - 1);
+  };
 
-function removeFromStack(stack) {
-  return stack.pop(stack.length - 1);
+  return stack;
 }
 
 console.log(isValidBrackets("([{}])"));

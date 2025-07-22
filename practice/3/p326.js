@@ -6,11 +6,13 @@ function filterByShape(arr, filterBy) {
   const filterKeys = Object.keys(filterBy);
 
   return arr.filter((item) => {
-    return filterKeys.every(key => item[key] === filterBy[key] ^ everyIsNaN(item[key], filterBy[key])) // 
-  })
-
+    return filterKeys.every(
+      (key) =>
+        (item[key] === filterBy[key]) ^ everyIsNaN([item[key], filterBy[key]])
+    );
+  });
 }
 
-function everyIsNaN(value1, value2) {
-  return Number.isNaN(value1) && Number.isNaN(value2);
+function everyIsNaN(arr) {
+  return arr.values().every((item) => Number.isNaN(item));
 }

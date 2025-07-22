@@ -13,6 +13,7 @@ function equalArrays(arr1, arr2) {
 
   for (const item of arr1) {
     const key = createKey(item);
+
     const amount = (counter.get(key) ?? 0) + 1;
     counter.set(key, amount);
   }
@@ -40,7 +41,5 @@ function createKey(item) {
 
 const arr1 = [{ x: 1 }, { x: 3 }, 0, { x: 2 }];
 const arr3 = [[3, 2, 1], { x: 1 }, [1, 3, 2]];
-const arr2 = arr1.toSorted();
-console.log(arr2);
 
 console.log(equalArrays(arr1, arr2));

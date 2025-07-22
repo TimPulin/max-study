@@ -9,6 +9,7 @@ function isAnagram(a, b) {
 }
 
 // NOTE GPT говорит, что это решение эффективнее благодаря отсутствию сортировки, у которой сложность O(n log n)
+// Подсчет
 function useObj(a, b) {
   const charCount = {};
   for (const char of a.toLowerCase()) {
@@ -23,6 +24,7 @@ function useObj(a, b) {
   return Object.values(charCount).every((amount) => amount === 0);
 }
 
+// Сортировка
 function useSort(a, b) {
   if (a.length !== b.length) return false;
   return sortStr(a) === sortStr(b);

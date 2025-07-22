@@ -8,10 +8,6 @@
 Оценка босса (имя босса передается вторым аргументом) важнее остальных, поэтому она удваивается!
 */
 
-const APPROVE_MSG = "Nice Work Champ!";
-const REJECT_MS = "Get Out Now!";
-const SCORES_FOR_REJECT = 5;
-
 function rating(meet, boss) {
   const meetEntries = Object.entries(meet);
 
@@ -20,9 +16,14 @@ function rating(meet, boss) {
     0
   );
 
-  const average = totalScores / meetEntries.length;
+  return getVerdict((average = totalScores / meetEntries.length));
+}
 
-  return average <= SCORES_FOR_REJECT ? REJECT_MS : APPROVE_MSG;
+const APPROVE_MSG = "Nice Work Champ!";
+const REJECT_MS = "Get Out Now!";
+const SCORES_FOR_REJECT = 5;
+function getVerdict(scores) {
+  return scores <= SCORES_FOR_REJECT ? REJECT_MS : APPROVE_MSG;
 }
 
 const meet = {

@@ -4,6 +4,7 @@
 Одно число встречается один раз. Определите это число.
 */
 // NOTE узнать больше про побитовые операции
+//  операция xor обратима a ^ b ^ b = a
 
 function findUnique(numbers) {
   return numbers.reduce((acc, item) => acc ^ item, 0);

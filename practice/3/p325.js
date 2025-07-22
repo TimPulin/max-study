@@ -5,10 +5,5 @@
 в итоговом объекте нужно взять значение последнего объекта с этим свойством.
 */
 function mergeObjects(...objects) {
-  let mergedObj = {};
-  for (const obj of objects) {
-    Object.assign(mergedObj, obj);
-  }
-
-  return mergedObj;
+  return objects.reduce((acc, obj) => ({ ...acc, ...obj }), {});
 }

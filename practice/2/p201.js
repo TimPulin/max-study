@@ -35,3 +35,10 @@ function shortestWord(str) {
 // type: int  default: --stack-size=984
 
 // node --stack-size=3000 p201.js
+
+const arr = Array(5).fill("_");
+arr.emptySlots = function () {
+  return this.filter((item) => item != "_").length;
+};
+
+arr.emptySlots();

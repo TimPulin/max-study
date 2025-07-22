@@ -17,16 +17,31 @@
 function innerJoin(arrLeft, arrRight, keyLeft, keyRight) {
   const result = [];
 
+  return arrLeft
+    .values()
+    .flatMap((itemLeft) => {
+      return arrRight
+        .values()
+        .filter((itemRight) => itemRight[keyRight] === itemLeft[keyLeft])
+        .map((itemRight) => ({
+          ...itemLeft,
+          ...itemRight,
+        }));
+    })
+    .toArray();
+
   for (const itemLeft of arrLeft) {
-    const filtered = arrRight
+    // const filtered =
+    arrRight
       .values()
       .filter((itemRight) => itemRight[keyRight] === itemLeft[keyLeft])
       .map((itemRight) => ({
         ...itemLeft,
         ...itemRight,
-      }));
+      }))
+      .forEach((arr) => result.push(arr));
 
-    result.push(...filtered);
+    // result.push(...filtered);
   }
 
   return result;

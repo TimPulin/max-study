@@ -6,10 +6,10 @@ Increment (инкремент) — операция увеличения, чащ
 */
 
 function incrementString(str) {
-  return useCycle(str);
+  return useLoop(str);
 }
 
-function useCycle(str) {
+function useLoop(str) {
   let digits = [];
 
   for (let i = str.length - 1; i >= 0; i--) {

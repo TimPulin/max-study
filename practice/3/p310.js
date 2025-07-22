@@ -14,13 +14,16 @@ function parseCsv(csv) {
   const headers = headersRow.split(";");
 
   return dataRow.values().map((line) => {
-    const obj = {};
     const values = line.split(";");
 
-    for (let i = 0; i < values.length; i++) {
-      obj[headers[i]] = values[i];
-    }
+    // const obj = {};
+    // for (let i = 0; i < values.length; i++) {
+    //   obj[headers[i]] = values[i];
+    // }
+    // return obj;
 
-    return obj;
+    return Object.fromEntries(
+      headersRow.map((_, i) => [headers[i], values[i]])
+    );
   });
 }

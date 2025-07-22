@@ -24,14 +24,19 @@ function useDeclaration(visits) {
     .filter((item) => item.key === "browser")
     .map((item) => item.value);
 
-  return Array.from(new Set(browsers).values());
+  return Array.from(new Set(browsers));
 }
+
+// https://developer.mozilla.org/en-US/docs/Glossary/Loop
+
 // NOTE на мой взгляд этот вариант чище
-function useCycle(visits) {
+function useLoop(visits) {
   const browsers = new Set();
   for (const { info } of visits) {
-    const browser = info.find((item) => item.key === "browser")?.value;
-    if (browser) browsers.add(browser);
+    const browserInfo = info.find((item) => item.key === "browser");
+    if (browserInfo !== undefined) {
+      browsers.add(browserInfo.value);
+    }
   }
   return Array.from(browsers);
 }

@@ -11,8 +11,8 @@ const NON_ACTIVITY_TIMEOUT = 10;
 function whosOnline(friends) {
   const statuses = {};
 
-  let statusKey = null;
   for (const friend of friends) {
+    let statusKey = null;
     if (friend.status === "offline") {
       statusKey = "offline";
     } else if (friend.lastActivity > NON_ACTIVITY_TIMEOUT) {
@@ -21,10 +21,8 @@ function whosOnline(friends) {
       statusKey = "online";
     }
 
-    if (statusKey) {
-      statuses[statusKey] ??= [];
-      statuses[statusKey].push(friend.username);
-    }
+    statuses[statusKey] ??= [];
+    statuses[statusKey].push(friend.username);
   }
   return statuses;
 }

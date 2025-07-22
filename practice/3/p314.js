@@ -1,3 +1,5 @@
+// NOTE закончили на этом
+
 /*
 Годовой доход сотрудника зависит от его зарплаты, но для разных уровней вычисляется по-разному.
 
@@ -44,21 +46,13 @@ const salaryBonus = {
 
 const MONTH_IN_YEAR = 12;
 
+const level2formula = {
+  junior: (e) => e.monthlyWage * 12,
+  middle: (e) => e.monthlyWage * 12 * 1.1,
+};
+
 function totalIncome(employees) {
-  return (
-    employees
-      .map(({ level, monthlyWage, tenure }) => {
-        return (
-          monthlyWage +
-          salaryBonus.calc({
-            level,
-            monthlyWage,
-            tenure,
-          })
-        );
-      })
-      .reduce((total, amount) => total + amount, 0) * MONTH_IN_YEAR
-  );
+  return employees.reduce((acc, e) => acc + level2formula[e.level](e), 0);
 }
 
 const employees = [

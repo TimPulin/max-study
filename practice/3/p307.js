@@ -3,15 +3,14 @@
 */
 
 function template(str, dict) {
-  return str.replaceAll(
-    /\{(\w+)\}/g,
-    (placeholder, key) => dict[key] ?? placeholder
+  return str.replaceAll(/{(.+?)}/g, (placeholder, key) =>
+    Object.hasOwn(dict, key) ? dict[key] : placeholder
   );
 }
 
 console.log(
   template(
-    `Купить {size}-комнатную квартиру в городе {city} за {price} млн {test} рублей`,
-    { size: 2, city: "Тверь", price: 7 }
+    `Купить {size}-комнатную квартиру в городе {ГОРОД} за {price} млн {test} рублей`,
+    { size: 2, ГОРОД: "Тверь", price: 7 }
   )
 );

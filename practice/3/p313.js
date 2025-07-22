@@ -15,16 +15,23 @@ const digits = {
   nine: 9,
 };
 
+Object.setPrototypeOf(digits, null);
+
 function replaceDigits(str) {
   return str
     .split(" ")
     .map((item) => {
       const itemLowerCase = item.toLowerCase();
       return Object.hasOwn(digits, itemLowerCase)
-        ? digits[itemLowerCase]
+        ? // return digits[itemLowerCase] !== undefined
+          // return itemLowerCase in digits
+          // return digits.hasOwnProperty(itemLowerCase)
+          // return {}.hasOwnProperty.call(digits, itemLowerCase)
+          // return Object.prototype.hasOwnProperty.call(digits, itemLowerCase)
+          digits[itemLowerCase]
         : item;
     })
     .join(" ");
 }
 
-console.log(replaceDigits("one of us took bus"));
+console.log(replaceDigits("one of us took constructor"));
